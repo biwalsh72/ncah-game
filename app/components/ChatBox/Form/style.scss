@@ -1,0 +1,45 @@
+.chatbox-form {
+  background: #212121;
+  border-top: 1px solid white;
+  flex: 0 0 50px;
+  display: flex;
+  padding: 10px;
+
+  input {
+    background: rgb(110, 110, 110);
+    border: none;
+    color: white;
+    flex: 1;
+    font-size: 16px;
+    margin-right: 5px;
+    outline: none;
+  }
+
+  input::-webkit-input-placeholder {
+    color: white !important;
+    font-weight: 200;
+  }
+
+  button {
+    background: black;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    flex: 0 0 60px;
+    font-size: 14px;
+    padding: 0;
+    text-transform: uppercase;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.game-actions {
+  margin: 5px;
+  text-align: right;
+  button {
+    padding: 8px 8px 10px 8px;
+  }
+}

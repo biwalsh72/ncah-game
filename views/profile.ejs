@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Not Cards Against Humanity</title>
+    <link href="/css/chat.css" rel="stylesheet" type="text/css"/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+</head>
+<body>
+        <style>
+            body { padding-top:80px; word-wrap:break-word; }
+        </style>
+
+
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Account</h3>
+
+                <% if (user.local.username) { %>
+                    <p>
+                        <strong>id</strong>: <%= user._id %><br>
+                        <strong>username</strong>: <%= user.local.username %><br>
+                        <strong>password</strong>: <%= user.local.password %>
+                    </p>
+                    
+                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                <% } else { %>
+                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                <% } %>
+
+            </div>
+        </div>
+
+</div>
+
+<script src = "/app/chat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+</body>
+</html>
+

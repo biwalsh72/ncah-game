@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NCAH Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel="stylesheet" href="/css/menu.css">
+
+</head>
+
+<body>
+
+
+
+
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
+        <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">&times;</button>
+        <a href="#" class="w3-bar-item w3-button">Username: </a>
+        <a href="#" class="w3-bar-item w3-button"><%= user.local.username %></a>
+        <a href="#" class="w3-bar-item w3-button"></a>
+        <a href="/logout" class="btn btn-default">Logout</a>
+    </div>
+
+    <div class="w3-teal">
+        <button class="w3-button w3-teal w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+    </div>
+
+
+    <div class='add-room'>
+        <div class='class-form-container'>
+            <div class='form-title'>Create a game:</div>
+            <form onSubmit={createRoom} class='add-room-form'>
+                <div class='addroom-input-container'>
+                    <input id='room-title' placeholder='Enter room name' class='addroom-input' />
+                </div>
+                <!--<div class='addroom-input-container'>
+                        <label class='addroom-label'>Points to win: </label>
+                        <input type='number' id='points-to-win' class='addroom-input' placeholder='10' />
+                    </div>-->
+                <div class='addroom-input-container'>
+                    <input type='submit' value='Host Game' class='btn' />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <div class='room-list'>
+        <div class="title w3-animate-right">In-Progress Games</div>
+        <div class='roomlist-window css-scrollbar'>
+
+            <!--Room list goes here-->
+
+
+            <!--{rooms.map((room) => (
+            <RoomEntry key={room.name} room={room} joinRoom={joinRoom} />
+          ))}-->
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        function openRightMenu() {
+            document.getElementById("rightMenu").style.display = "block";
+        }
+
+        function closeRightMenu() {
+            document.getElementById("rightMenu").style.display = "none";
+        }
+    </script>
+
+
+
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js'></script>
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
+</body>
+
+</html>

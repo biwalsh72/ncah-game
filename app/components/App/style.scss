@@ -1,0 +1,57 @@
+:local(.main) {
+  display: flex;
+  flex: 1;
+
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+
+  .stage {
+    flex: 1;
+    //padding: 15px;
+  }
+
+  .chatbox {
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    flex: 0 0 320px;
+    max-height: 100vh;
+  }
+
+  @media (max-width: 1024px) {
+    .chatbox {
+      border-left: none;
+      border-top: 1px solid white;
+      flex: 0 0 130px;
+    }
+  }
+}
+
+:local(.form) {
+  background: black;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex: 1;
+
+  input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 5vw;
+    margin-top: -50px;
+    padding: 15px 0;
+    outline: none;
+  }
+
+  input::-webkit-input-placeholder {
+    color: white !important;
+    font-weight: 200;
+  }
+}
+
+.game-actions {
+    background: #ffffff;
+}
