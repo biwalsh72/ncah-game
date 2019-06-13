@@ -4,6 +4,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: #212121;
 }
 
 *, *:before, *:after {
@@ -11,8 +12,8 @@ html, body {
 }
 
 body {
-  background: white;
-  color: black;
+  background: #212121;
+  color: white;
   display: flex;
   flex-direction: column;
   font-size: 16px;
@@ -29,8 +30,8 @@ main {
   input {
     background: none;
     border: none;
-    border-bottom: 1px solid black;
-    color: black;
+    border-bottom: 1px solid white;
+    color: white;
     font-size: 5vw;
     margin-top: -50px;
     padding: 15px 0;
@@ -38,7 +39,7 @@ main {
   }
 
   input::-webkit-input-placeholder {
-    color: black !important;
+    color: white !important;
     font-weight: 200;
   }
 }
