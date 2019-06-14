@@ -31,7 +31,7 @@ class CahServer {
   }
 
   userClosed(data) {
-    console.log('userclosed ran!!!!!!');
+    console.log('user Closed');
     this.socket.room.newMessage({
       username: 'Server',
       text: `
