@@ -17,7 +17,7 @@ const StageRight = React.createClass({
   renderContent() {
     const { user, currentRound, currentUser } = this.props;
 
-    if (currentRound.judgeId === user.id || currentRound.chosenWhiteCards[user.id]) {
+    if (currentRound.czarId === user.id || currentRound.chosenWhiteCards[user.id]) {
       return <PlayerSubmissions { ...this.props } />;
     }
 

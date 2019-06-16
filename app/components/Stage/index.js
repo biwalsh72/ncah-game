@@ -81,7 +81,7 @@ const Stage = React.createClass({
   },
 
   renderNextRoundButton(round) {
-    if (round.judgeId !== this.props.user.id) { return null; }
+    if (round.czarId !== this.props.user.id) { return null; }
 
     if (this.state.renderNextRoundButton) {
       return (
@@ -155,7 +155,7 @@ const Stage = React.createClass({
       );
     }
 
-    if ((_.keys(currentRound.chosenWhiteCards).length !== (currentRound.playerIds.length - 1)) && currentRound.judgeId === user.id) {
+    if ((_.keys(currentRound.chosenWhiteCards).length !== (currentRound.playerIds.length - 1)) && currentRound.czarId === user.id) {
       return (
         <div className={ style.overlay }>
           <p>You are the Card Czar! <br /> <small>Waiting for cards...</small></p>

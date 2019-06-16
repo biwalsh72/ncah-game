@@ -7,7 +7,7 @@ const ChooseWinnerButton = React.createClass({
 
   render() {
     const { user, currentRound } = this.props;
-    if (user.id !== currentRound.judgeId) { return null; }
+    if (user.id !== currentRound.czarId) { return null; }
     if (_.keys(currentRound.chosenWhiteCards).length !== (currentRound.playerIds.length - 1)) { return null; }
     if (currentRound.winnerId !== null) { return null; }
 

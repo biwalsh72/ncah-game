@@ -20,7 +20,7 @@ class Room {
   }
 
   get _currentJudge() {
-    return this.players[this._currentGame._currentRound.judgeId];
+    return this.players[this._currentGame._currentRound.czarId];
   }
 
   get _playerCount() {

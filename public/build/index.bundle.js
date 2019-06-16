@@ -50,7 +50,7 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar _jquery = __webpack_require__(2);\n\nvar _jquery2 = _interopRequireDefault(_jquery);\n\n__webpack_require__(3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n(0, _jquery2.default)(function () {\n  var $body = (0, _jquery2.default)('body');\n  var $startForm = $body.find('#start-form');\n  var $input = $startForm.find('input');\n\n  $startForm.on('submit', function (evt) {\n    evt.preventDefault();\n    var value = $input.val().replace(/\\s+/g, '-').toLowerCase();\n\n    window.location.href = value;\n  });\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/index.js\n// module id = 1\n// module chunks = 0\n//# sourceURL=webpack:///./app/index.js?");
+	eval("'use strict';\n\nvar _jquery = __webpack_require__(2);\n\nvar _jquery2 = _interopRequireDefault(_jquery);\n\n__webpack_require__(3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n(0, _jquery2.default)(function () {\n  var $body = (0, _jquery2.default)('body');\n  var $startForm = $body.find('#start-form');\n  var $input = $startForm.find('input');\n\n  $startForm.on('submit', function (evt) {\n    evt.preventDefault();\n    var value = $input.val().replace(/\\s+/g, '-').toLowerCase();\n\n    window.location.href = '/room/' + value;\n  });\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/index.js\n// module id = 1\n// module chunks = 0\n//# sourceURL=webpack:///./app/index.js?");
 
 /***/ },
 /* 2 */

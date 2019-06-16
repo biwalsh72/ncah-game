@@ -22,7 +22,7 @@ class Game {
   }
 
   get _previousJudge() {
-    return _.last(this.rounds) ? _.last(this.rounds).judgeId : undefined;
+    return _.last(this.rounds) ? _.last(this.rounds).czarId : undefined;
   }
 
   get _currentRound() {

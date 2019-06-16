@@ -2,26 +2,25 @@ const _ = require('lodash');
 const data = require('../data.json');
 
 class Round {
-  constructor(gameId, players = {}, whiteCardsUsed = [], blackCardsUsed = [], previousJudge) {
+  constructor(gameId, players = {}, whiteCardsUsed = [], blackCardsUsed = [], previousCzar) {
     this.gameId = gameId;
     this.id = _.uniqueId(Math.floor(Date.now() / 1000));
     this.players = players;
     this.playerIds = _.map(this.players, (p => p.id));
     this.whiteCardsUsed = [...whiteCardsUsed];
     this.blackCardsUsed = [...blackCardsUsed];
-    this.previousJudge = previousJudge;
+    this.previousCzar = previousCzar;
 
     // Temporary fix to avoid crashing
     this.gameInterrupt = false;
 
-
     this.chosenWhiteCards = {};
     this.winnerId = null;
-    this.judgeId = null;
+    this.czarId = null;
 
     this.allocateWhiteCards();
     this.allocateBlackCard();
-    this.assignJudge();
+    this.assignCzar();
   }
 
   get _blackCardIndex() {
@@ -40,9 +39,10 @@ class Round {
 
      console.log('playerIDs that are left ' + this.playerIds);
 
-     if (this.judgeId === playerId) {
-       this.judgeId = null;
-       this.assignJudge();
+     if (this.czarId === playerId) {
+       this.czarId = null;
+       //this.playerId = null;
+       this.assignCzar(); //////////////////bug happening here need to make sure that the player that left is no longer the card czar
      }
   }
 
@@ -50,20 +50,22 @@ class Round {
     console.log("playerJoined: " + JSON.stringify(player));
 
     // Temporary fix
+    //if (!this.gameInterrupt) {
       this.players[player.id] = player;
       this.playerIds.push(player.id);
       this.allocateWhiteCards();
+    //}
   }
 
-  assignJudge() {
-    if (!this.previousJudge) {
-      this.judgeId = this.playerIds[0];
+  assignCzar() {
+    if (!this.previousCzar) {
+      this.czarId = this.playerIds[0];
     } else {
-      const nextJudgeIndex = this.playerIds.indexOf(this.previousJudge) + 1;
+      const nextJudgeIndex = this.playerIds.indexOf(this.previousCzar) + 1;
       if (this.playerIds[nextJudgeIndex]) {
-        this.judgeId = this.playerIds[nextJudgeIndex];
+        this.czarId = this.playerIds[nextJudgeIndex];
       } else {
-        this.judgeId = this.playerIds[0];
+        this.czarId = this.playerIds[0];
       }
     }
   }

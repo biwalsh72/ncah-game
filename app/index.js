@@ -10,6 +10,6 @@ $(() => {
     evt.preventDefault();
     const value = $input.val().replace(/\s+/g, '-').toLowerCase();
 
-    window.location.href = value;
+    window.location.href = '/room/' + value;
   });
 });

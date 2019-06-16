@@ -3,7 +3,7 @@ import styles from './style.scss';
 
 const StageHeader = React.createClass({
   renderJudgeText(round, user) {
-    if (round && round.judgeId !== user.id) {
+    if (round && round.czarId !== user.id) {
       return null;
     }
 

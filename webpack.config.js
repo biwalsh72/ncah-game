@@ -11,7 +11,6 @@ const PATHS = {
   node: path.resolve(__dirname, 'node_modules'),
 };
 
-
 const config = {
   devtool: 'eval',
   entry: {
