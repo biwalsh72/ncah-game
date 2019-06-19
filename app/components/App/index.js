@@ -26,9 +26,9 @@ const App = React.createClass({
     socket.on('connect', this.connect);
     socket.on('updateroom', this.updateRoom);
 
-    if (localStorage.user) {
+    if (sessionStorage.user) {
       setTimeout(() => {
-        socket.emit('adduser', JSON.parse(localStorage.user));
+        socket.emit('adduser', JSON.parse(sessionStorage.user));
         this.user();
       }, 300);
       
@@ -40,7 +40,7 @@ const App = React.createClass({
     {
       ev.preventDefault();
 
-      socket.emit('greet', localStorage.user);
+      socket.emit('greet', sessionStorage.user);
       
       return ev.returnValue = 'Are you sure you want exit the game?';
 
@@ -77,7 +77,8 @@ const App = React.createClass({
   },
 
   user() {
-    let user = localStorage.user ? JSON.parse(localStorage.user) : { id: null };
+    let user = sessionStorage.user ? JSON.parse(sessionStorage.user) : { id: null };
+    console.log(user.local);
 
     if (this.state.players[user.id]) {
       //console.log('Return from user():');
@@ -114,7 +115,7 @@ const App = React.createClass({
       username
     };
 
-    localStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('user', JSON.stringify(user));
     this.state.currentUser = user;
     this.state.currentUserName = user.username;
 
@@ -124,7 +125,7 @@ const App = React.createClass({
   renderContent() {
     const { socket, data, currentUser } = this.props;
 
-    if (!localStorage.user && !currentUser) {
+    if (!sessionStorage.user && !currentUser) {
       return (
         <form onSubmit={ this.onSubmit } className={ styles.form }>
           <input type="text" ref="input" placeholder="Enter your name" />
