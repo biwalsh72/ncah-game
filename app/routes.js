@@ -40,6 +40,8 @@ module.exports = function (app, passport) {
     });
 
     app.get('/create', isLoggedIn, function (req, res) {
+        let user = req.user;
+        console.log(user.local.username);
         res.sendFile(path.resolve(__dirname + '/../public/index.html'));
     });
 
@@ -47,6 +49,11 @@ module.exports = function (app, passport) {
         res.sendFile(path.resolve(__dirname + '/../public/room.html'));
     });
 
+    app.use('/save', function(req, res) {
+        let user = req.user;
+        res.json({ username: user.local.username });
+        console.log(user.local.username);
+    })
     // =============================================================================
     // AUTHENTICATE (FIRST LOGIN) ==================================================
     // =============================================================================
