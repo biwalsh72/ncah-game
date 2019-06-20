@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import styles from './style.scss';
 import { ChatBox, Stage } from '../';
+import Cookies from 'js-cookie';
 
 const App = React.createClass({
   getInitialState() {
@@ -108,7 +109,9 @@ const App = React.createClass({
   onSubmit(evt) {
     evt.preventDefault();
     const input = this.refs.input;
-    const username = input.value;
+
+    const username = Cookies.get('username');
+    Cookies.remove('username');
 
     const user = {
       id: _.uniqueId(`${ username }-${ Math.floor(Date.now() / 1000) }`),
@@ -124,15 +127,16 @@ const App = React.createClass({
 
   renderContent() {
     const { socket, data, currentUser } = this.props;
-
-    if (!sessionStorage.user && !currentUser) {
+   // this.onSubmit();
+    
+    if (!currentUser && !sessionStorage.user) {
       return (
         <form onSubmit={ this.onSubmit } className={ styles.form }>
           <input type="text" ref="input" placeholder="Enter your name" />
         </form>
-      );
+        );
     }
-
+    
     // Here goes code if game in progress..
 
     return (

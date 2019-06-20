@@ -1,4 +1,7 @@
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const Cookies = require('js-cookie');
+
 module.exports = function (app, passport) {
     // normal routes ===============================================================
 
@@ -41,19 +44,36 @@ module.exports = function (app, passport) {
 
     app.get('/create', isLoggedIn, function (req, res) {
         let user = req.user;
-        console.log(user.local.username);
+        Cookies.set('username', user.local.username);
+        res.cookie('username', user.local.username);
         res.sendFile(path.resolve(__dirname + '/../public/index.html'));
     });
 
      app.get('/room/:id', isLoggedIn, function (req, res) {
+        //let user = req.user;
+       // Cookies.set('username', user.local.username);
+      //  res.cookie('username', user.local.username);
         res.sendFile(path.resolve(__dirname + '/../public/room.html'));
     });
 
-    app.use('/save', function(req, res) {
+    /*
+    app.use('/setuser', isLoggedIn, function (req, res) {
         let user = req.user;
-        res.json({ username: user.local.username });
-        console.log(user.local.username);
-    })
+        res.cookie('username', user.local.username);
+    });
+    */
+
+  //  app.use(cookieParser());
+/*
+    app.get('/setuser', isLoggedIn, (req, res) => {
+        //let user = req.user;
+        //console.log(user.local.username);
+        //Cookies.set('username', user.local);
+       // res.cookie("username", user.local.username);
+        //res.send('user data added to cookie');
+       // console.log(document.cookie);
+    });
+    */
     // =============================================================================
     // AUTHENTICATE (FIRST LOGIN) ==================================================
     // =============================================================================
