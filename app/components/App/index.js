@@ -93,8 +93,6 @@ const App = React.createClass({
     this.state.currentUserName = user.username;
     this.state.currentUser = user;
 
-
-    //console.log('NO USER!');
     return {};
   },
 
@@ -106,35 +104,24 @@ const App = React.createClass({
     this.props.socket.emit('join', window.location.pathname.substring(1));
   },
 
-  onSubmit(evt) {
-    evt.preventDefault();
-    const input = this.refs.input;
-
-    const username = Cookies.get('username');
-    Cookies.remove('username');
-
-    const user = {
-      id: _.uniqueId(`${ username }-${ Math.floor(Date.now() / 1000) }`),
-      username
-    };
-
-    sessionStorage.setItem('user', JSON.stringify(user));
-    this.state.currentUser = user;
-    this.state.currentUserName = user.username;
-
-    this.props.socket.emit('adduser', user);
-  },
-
   renderContent() {
     const { socket, data, currentUser } = this.props;
    // this.onSubmit();
     
     if (!currentUser && !sessionStorage.user) {
-      return (
-        <form onSubmit={ this.onSubmit } className={ styles.form }>
-          <input type="text" ref="input" placeholder="Enter your name" />
-        </form>
-        );
+      const username = Cookies.get('username');
+      Cookies.remove('username');
+  
+      const user = {
+        id: _.uniqueId(`${ username }-${ Math.floor(Date.now() / 1000) }`),
+        username
+      };
+  
+      sessionStorage.setItem('user', JSON.stringify(user));
+      this.state.currentUser = user;
+      this.state.currentUserName = user.username;
+  
+      this.props.socket.emit('adduser', user);
     }
     
     // Here goes code if game in progress..

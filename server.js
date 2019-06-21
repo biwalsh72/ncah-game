@@ -29,12 +29,6 @@ const rooms = {};
 // or
 var util = require('util');
 
-/*
-server.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-*/
-
 mongoose.connect(configDB.url, {
   useNewUrlParser: true
 });
