@@ -1,5 +1,4 @@
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const Cookies = require('js-cookie');
 
 module.exports = function (app, passport) {
@@ -50,30 +49,8 @@ module.exports = function (app, passport) {
     });
 
      app.get('/room/:id', isLoggedIn, function (req, res) {
-        //let user = req.user;
-       // Cookies.set('username', user.local.username);
-      //  res.cookie('username', user.local.username);
         res.sendFile(path.resolve(__dirname + '/../public/room.html'));
     });
-
-    /*
-    app.use('/setuser', isLoggedIn, function (req, res) {
-        let user = req.user;
-        res.cookie('username', user.local.username);
-    });
-    */
-
-  //  app.use(cookieParser());
-/*
-    app.get('/setuser', isLoggedIn, (req, res) => {
-        //let user = req.user;
-        //console.log(user.local.username);
-        //Cookies.set('username', user.local);
-       // res.cookie("username", user.local.username);
-        //res.send('user data added to cookie');
-       // console.log(document.cookie);
-    });
-    */
     // =============================================================================
     // AUTHENTICATE (FIRST LOGIN) ==================================================
     // =============================================================================
