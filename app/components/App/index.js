@@ -66,7 +66,7 @@ const App = React.createClass({
 
   resetGame() {
     this.props.socket.emit('start-game');
-    //this.props.socket.emit('sendchat', 'Game has been reset', 'Server');
+    this.props.socket.emit('sendchat', 'Game has been reset', 'Server');
   },
 
   getCurrentGame() {
@@ -79,7 +79,6 @@ const App = React.createClass({
 
   user() {
     let user = sessionStorage.user ? JSON.parse(sessionStorage.user) : { id: null };
-    console.log(user.local);
 
     if (this.state.players[user.id]) {
       //console.log('Return from user():');
@@ -106,7 +105,6 @@ const App = React.createClass({
 
   renderContent() {
     const { socket, data, currentUser } = this.props;
-   // this.onSubmit();
     
     if (!currentUser && !sessionStorage.user) {
       const username = Cookies.get('username');
@@ -131,7 +129,7 @@ const App = React.createClass({
         <Stage { ...this.state } user={ this.user() } socket={ socket } data={ data } />
         <div className="game-actions">
           <button onClick={ this.toggleChat } title="Toggle chat">💬</button>
-          {/* <button onClick={ this.resetGame } title="Reset game (use if in a broken state">🔄</button> */}
+          { <button onClick={ this.resetGame } title="Reset game (use if in a broken state">🔄</button> }
         </div>
         <ChatBox user={ this.user() } socket={ socket } { ...this.state } />
       </main>
