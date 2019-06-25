@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const PATHS = {
   app: {
@@ -29,7 +30,8 @@ const config = {
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -37,19 +39,31 @@ const config = {
         }
       },
       {
-        test: /\.scss$/,
-        //exclude: /node_modules/,
-        use: ['style-loader',
-          'css-loader',
-          'sass-loader'
+        test: /\.css$/,
+        use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader?modules&importLoaders=1&localIdentName=[local]_[hash:base64:6]',
+            {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: () => [require('autoprefixer')({
+                        'browsers': ['> 1%', 'last 2 versions']
+                    })],
+                }
+            },
         ]
-      },
-    ],
+    }
+    ]
   },
 
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
 
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
+    /*
     new webpack.LoaderOptionsPlugin({
       options: {
         context: __dirname,
@@ -58,6 +72,7 @@ const config = {
         ]
       }
     })
+    */
   ],
 
   performance: {

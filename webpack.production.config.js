@@ -1,69 +1,65 @@
-const webpack = require('webpack');
+`/* eslint-disable import/no-extraneous-dependencies /
+/ eslint-disable arrow-body-style /
+/ eslint-disable no-unused-vars */
+
 const path = require('path');
-const autoprefixer = require('autoprefixer');
-const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV.toLowerCase() : 'development';
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const PATHS = {
-  app: {
-    index: path.resolve(__dirname, 'app', 'index.js'),
-    room: path.resolve(__dirname, 'app', 'room.js')
-  },
-  build: path.resolve(__dirname, 'public', 'build'),
-  node: path.resolve(__dirname, 'node_modules'),
+const bundleExtractPlugin = new ExtractTextPlugin({
+filename: 'css/bundle.css',
+});
+
+const vendorsExtractPlugin = new ExtractTextPlugin({
+filename: 'css/vendors.css',
+});
+
+module.exports = (env) => {
+return {
+name: 'client',
+target: 'web',
+entry: ['./src/client/app.jsx'],
+output: {
+path: path.resolve(__dirname, 'public'),
+filename: 'js/bundle.js',
+},
+module: {
+loaders: [
+{
+test: [/.js$|.jsx$/],
+exclude: [/node_modules/],
+loader: 'babel-loader',
+options: {
+plugins: ['transform-runtime'],
+presets: ['es2015', 'stage-0', 'react'],
+},
+},
+{
+test: /.scss$/,
+exclude: [/node_modules/],
+use: bundleExtractPlugin.extract({
+use: ['css-loader', 'sass-loader'],
+}),
+},
+{
+test: /.css$/,
+exclude: [/node_modules/],
+use: vendorsExtractPlugin.extract({
+use: ['css-loader'],
+}),
+},
+],
+},
+stats: {
+colors: true,
+},
+devtool: 'source-map',
+plugins: [
+new webpack.DefinePlugin({
+SOCKET_URL: JSON.stringify(process.env.SOCKET_URL ? process.env.SOCKET_URL : 'wss://localhost:3000'),
+}),
+bundleExtractPlugin,
+vendorsExtractPlugin,
+],
 };
-
-
-const config = {
-  debug: false,
-  devtool: 'source-maps',
-  entry: {
-    index: PATHS.app.index,
-    room: PATHS.app.room
-  },
-
-  output: {
-    path: PATHS.build,
-    filename: '[name].bundle.js',
-    publicPath: '',
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.json$/,
-        loaders: ['json'],
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.js$/,
-        loaders: ['babel'],
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'postcss', 'sass'],
-        exclude: /node_modules/,
-      },
-    ],
-  },
-
-  postcss: function () {
-    return [autoprefixer({ browsers: ['last 2 versions'] })];
-  },
-
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(NODE_ENV)
-      }
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-  ]
 };
-
-module.exports = config;
