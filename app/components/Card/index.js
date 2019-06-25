@@ -1,7 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
+var createReactClass = require('create-react-class');
 
-const Card = React.createClass({
+const Card = createReactClass({
   onClick() {
     if (this.props.onClick) {
       this.props.onClick(this.props.card.index);

@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './style.scss';
 import Messages from './Messages';
 import Form from './Form';
+var createReactClass = require('create-react-class');
 
-const ChatBox = React.createClass({
+const ChatBox = createReactClass({
   onSubmit(message, sender) {
     setTimeout(() => {
       this.props.socket.emit('sendchat', message, sender);

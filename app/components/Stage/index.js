@@ -3,8 +3,9 @@ import classnames from 'classnames';
 import _ from 'lodash';
 import style from './styles.scss'
 import { Card, StageLeft, StageRight, StageHeader } from '../';
+var createReactClass = require('create-react-class');
 
-const Stage = React.createClass({
+const Stage = createReactClass({
   getInitialState() {
     return {
       selectedCards: [],

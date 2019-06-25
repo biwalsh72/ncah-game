@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './style.scss';
+var createReactClass = require('create-react-class');
 
-const StageHeader = React.createClass({
+const StageHeader = createReactClass({
   renderJudgeText(round, user) {
     if (round && round.czarId !== user.id) {
       return null;

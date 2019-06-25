@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, LeaderBoard } from '../';
+var createReactClass = require('create-react-class');
 
-const StageLeft = React.createClass({
+const StageLeft = createReactClass({
   submitChoices() {
     this.props.onSubmitChoices(this.props.currentRound);
   },

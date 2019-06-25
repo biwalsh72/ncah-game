@@ -3,8 +3,9 @@ import _ from 'lodash';
 import styles from './style.scss';
 import { ChatBox, Stage } from '../';
 import Cookies from 'js-cookie';
+var createReactClass = require('create-react-class');
 
-const App = React.createClass({
+const App = createReactClass({
   getInitialState() {
     return {
       name: '',

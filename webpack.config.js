@@ -12,7 +12,7 @@ const PATHS = {
 };
 
 const config = {
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: {
     index: [
       PATHS.app.index
@@ -29,32 +29,41 @@ const config = {
   },
 
   module: {
-    loaders: [
-      {
-        test: /\.json$/,
-        loaders: ['json'],
-        exclude: /node_modules/,
-      },
-      {
+    rules: [{
         test: /\.js$/,
-        loaders: ['babel'],
         exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'postcss', 'sass'],
-        exclude: /node_modules/,
+        //exclude: /node_modules/,
+        use: ['style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
     ],
   },
 
-  postcss: () => {
-    return [autoprefixer({ browsers: ['last 2 versions'] })];
-  },
-
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname,
+        postcss: [
+          autoprefixer
+        ]
+      }
+    })
   ],
+
+  performance: {
+    maxEntrypointSize: 2048000,
+    maxAssetSize: 2048000
+  }
 };
 
 module.exports = config;

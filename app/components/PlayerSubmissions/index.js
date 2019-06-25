@@ -1,10 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 import { Card, ChooseWinnerButton } from '../';
+var createReactClass = require('create-react-class');
 
 import styles from './style.scss';
 
-const PlayerSubmissions = React.createClass({
+const PlayerSubmissions = createReactClass({
   renderPlayerSubmission(cardIndex, index) {
     const { data } = this.props;
     const card = {

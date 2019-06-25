@@ -1,6 +1,7 @@
 import React from 'react';
+var createReactClass = require('create-react-class');
 
-const ChooseWinnerButton = React.createClass({
+const ChooseWinnerButton = createReactClass({
   onClick() {
     this.props.onClick(this.props.playerId);
   },

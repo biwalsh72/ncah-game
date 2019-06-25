@@ -2,8 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import styles from './style.scss';
 import jquery from 'jquery';
+var createReactClass = require('create-react-class');
 
-const Messages = React.createClass({
+const Messages = createReactClass({
   renderMessage(message, i) {
     const { user, currentUserName } = this.props;
     const classNames = {

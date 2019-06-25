@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './style.scss';
+var createReactClass = require('create-react-class');
 
-const Form = React.createClass({
+const Form = createReactClass({
   onSubmit(evt) {
     evt.preventDefault();
     const input = this.refs.input;

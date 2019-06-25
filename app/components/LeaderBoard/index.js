@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './style.scss';
+var createReactClass = require('create-react-class');
 
-const LeaderBoard = React.createClass({
+const LeaderBoard = createReactClass({
   renderRow({ playerId, score }, i) {
     const { players } = this.props;
 

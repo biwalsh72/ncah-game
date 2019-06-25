@@ -1,7 +1,8 @@
 import React from 'react';
 import { PlayerSubmissions, Card } from '../';
+var createReactClass = require('create-react-class');
 
-const StageRight = React.createClass({
+const StageRight = createReactClass({
   renderPlayerCard(card, index) {
     const { onWhiteCardSelected, selectedCards } = this.props;
     return (
