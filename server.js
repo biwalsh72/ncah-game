@@ -71,6 +71,9 @@ const cahServer = new CahServer(io);
 io.on('connection', (socket) => {
   cahServer.init(socket);
 
+  let rooms = io.sockets.adapter.rooms;
+  console.log(rooms);
+
   socket.on('disconnect', function (reason) {
     console.log('Socket disconnected! ' + reason);
   });

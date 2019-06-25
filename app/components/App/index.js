@@ -23,6 +23,36 @@ const App = React.createClass({
   },
 
   componentWillMount() {
+    const {socket, data } = this.props;
+    socket.on('connect', this.connect);
+    socket.on('updateroom', this.updateRoom);
+
+    if (sessionStorage.user) {
+      setTimeout(() => {
+        socket.emit('adduser', JSON.parse(sessionStorage.user));
+        this.user();
+      }, 300);
+    }
+    if (this.state.currentRound !== null) {
+
+
+    }
+
+    const perfEntries = window.performance.getEntriesByType("navigation");
+    if (perfEntries[0].type === 'reload') {
+      console.log('RELOAD')
+    }
+
+    window.addEventListener("beforeunload", (ev) => {
+      ev.preventDefault();
+      ev.returnValue = 'Are you sure you want to exit the game?';
+
+      socket.emit('greet', sessionStorage.user);
+
+      return ev.returnValue;
+    });
+
+    /*
     const { socket, data } = this.props;
     socket.on('connect', this.connect);
     socket.on('updateroom', this.updateRoom);
@@ -46,12 +76,17 @@ const App = React.createClass({
       return ev.returnValue = 'Are you sure you want exit the game?';
 
     });
+    */
   },
 
+  componentDidMount() {
+
+  },
 
 
   componentWillUnMount() {
     //localStorage.clear();
+    console.log('unmounted.');
   },
 
   getCurrentRound() {
