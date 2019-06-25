@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './style.scss';
+import './style.scss';
 import Messages from './Messages';
 import Form from './Form';
 var createReactClass = require('create-react-class');

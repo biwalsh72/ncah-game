@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import styles from './style.scss';
+import './style.scss';
 import jquery from 'jquery';
 var createReactClass = require('create-react-class');
 
