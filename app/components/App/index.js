@@ -38,7 +38,7 @@ const App = React.createClass({
 
     }
 
-    const perfEntries = window.performance.getEntriesByType("navigation");
+    const perfEntries = window.performance.getEntriesByType("resource");
     if (perfEntries[0].type === 'reload') {
       console.log('RELOAD')
     }

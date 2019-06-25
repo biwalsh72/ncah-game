@@ -1,7 +1,7 @@
 const CahServer = require('./cah-server');
 const isProduction = process.env.NODE_ENV === 'production';
 const _ = require('lodash');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3007;
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -88,7 +88,7 @@ server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-
+/*
 
 if (!isProduction) {
   const webpack = require('webpack');
@@ -111,3 +111,5 @@ if (!isProduction) {
     console.log('Webpack Dev Server listening at 8080');
   });
 }
+
+*/
