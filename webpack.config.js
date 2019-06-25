@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const globImporter = require('node-sass-glob-importer');
 
 const PATHS = {
   app: {
@@ -39,24 +40,18 @@ const config = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(sc|c)ss$/,
         use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader?modules&importLoaders=1&localIdentName=[local]_[hash:base64:6]',
-            {
-                loader: 'postcss-loader',
-                options: {
-                    plugins: () => [require('autoprefixer')({
-                        'browsers': ['> 1%', 'last 2 versions']
-                    })],
-                }
-            },
-        ]
-    }
+          // fallback to style-loader in development
+          process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader"
+      ]
+  }
     ]
   },
 
-  plugins: [
+plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
 
     new MiniCssExtractPlugin({
