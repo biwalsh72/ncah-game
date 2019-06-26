@@ -1,8 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
 import _ from 'lodash';
-import style from './styles.scss'
 import { Card, StageLeft, StageRight, StageHeader } from '../';
+import './styles.scss';
+import style from './styles.scss';
 var createReactClass = require('create-react-class');
 
 const Stage = createReactClass({
@@ -45,14 +46,7 @@ const Stage = createReactClass({
       return;
     } else {
       selectedCards.push(cardIndex);
-      //shuffleArray(selectedCards);
-      //console.log("selectedCards:" + selectedCards);
     }
-
-
-    //shuffleArray(selectedCards);
-
-    //let selectedCards = shuffleArray(selectedCards);
 
     console.log("selectedCards: " + selectedCards);
     const actualSelectedCards = selectedCards.filter((c) => _.isNumber(c)).length;

@@ -2,9 +2,11 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const globImporter = require('node-sass-glob-importer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+
+const extractSCSS = new ExtractTextPlugin('style.css');
 
 const PATHS = {
   app: {
@@ -16,7 +18,7 @@ const PATHS = {
 };
 
 const config = {
-  devtool: 'source-map',
+  devtool: 'eval',
   entry: {
     index: [
       PATHS.app.index
@@ -38,44 +40,23 @@ const config = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
+          options: {
+            sourceMap: true
+          }
         }
       },
       {
-        test: /\.module\.scss$/,
-        loader: [
-          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-              camelCase: true,
-              sourceMap: isDevelopment
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: isDevelopment
-            }
-          }
-        ]
-      },
-      {
-        test: /\.s(a|c)ss$/,
-        exclude: /\.module.(s(a|c)ss)$/,
-        loader: [
-          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: isDevelopment
-            }
-          }
+        test: /\.(sc|c)ss$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { sourceMap: true, modules: 'global', } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true, modules: true } }
         ]
       }
+      
       ///...
     ]
   },
@@ -88,10 +69,7 @@ const config = {
 plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
 
-    new MiniCssExtractPlugin({
-      filename: isDevelopment ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
-    })
+    //extractSCSS,
     /*
     new webpack.LoaderOptionsPlugin({
       options: {

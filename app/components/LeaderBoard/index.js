@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './style.scss';
+import './style.scss';
 var createReactClass = require('create-react-class');
 
 const LeaderBoard = createReactClass({
