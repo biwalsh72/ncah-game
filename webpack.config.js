@@ -1,12 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const isDevelopment = process.env.NODE_ENV !== 'production'
-
-const extractSCSS = new ExtractTextPlugin('style.css');
 
 const PATHS = {
   app: {
@@ -68,18 +62,6 @@ const config = {
 
 plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-
-    //extractSCSS,
-    /*
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        context: __dirname,
-        postcss: [
-          autoprefixer
-        ]
-      }
-    })
-    */
   ],
 
   performance: {
