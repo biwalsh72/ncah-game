@@ -53,6 +53,8 @@ class CahServer {
       console.log('ROOMNAME ' + this.socket.room.name);
       console.log('PLAYERNAME ' + this.socket.player.username);
 
+      //maybe save this info into a cookie to retrieve on the menu?
+
       this.socket.room.playerLeft(this.socket.player.id);
 
 
