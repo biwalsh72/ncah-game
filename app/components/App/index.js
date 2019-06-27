@@ -34,9 +34,8 @@ const App = createReactClass({
         this.user();
       }, 300);
     }
+    
     if (this.state.currentRound !== null) {
-
-
     }
 
     const perfEntries = window.performance.getEntriesByType("resource");
