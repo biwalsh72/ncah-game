@@ -19,7 +19,7 @@ class Room {
     return _.last(this.games);
   }
 
-  get _currentJudge() {
+  get _currentCzar() {
     return this.players[this._currentGame._currentRound.czarId];
   }
 

@@ -26,6 +26,9 @@ const App = createReactClass({
   componentWillMount() {
     const {socket, data } = this.props;
     socket.on('connect', this.connect);
+    socket.on('reconnect', () => {
+      socket.emit('subscribe', window.location.pathname.substring(1))
+    });
     socket.on('updateroom', this.updateRoom);
 
     if (sessionStorage.user) {
@@ -51,32 +54,6 @@ const App = createReactClass({
 
       return ev.returnValue;
     });
-
-    /*
-    const { socket, data } = this.props;
-    socket.on('connect', this.connect);
-    socket.on('updateroom', this.updateRoom);
-
-    if (sessionStorage.user) {
-      setTimeout(() => {
-        socket.emit('adduser', JSON.parse(sessionStorage.user));
-        this.user();
-      }, 300);
-      
-    }
-    if (this.state.currentRound !== null) {
-      
-    }
-    window.addEventListener("beforeunload", (ev) =>
-    {
-      ev.preventDefault();
-
-      socket.emit('greet', sessionStorage.user);
-      
-      return ev.returnValue = 'Are you sure you want exit the game?';
-
-    });
-    */
   },
 
   componentDidMount() {

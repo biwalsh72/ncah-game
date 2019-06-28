@@ -62,7 +62,7 @@ describe('Game', () => {
             should(secondRound.whiteCardsUsed.length).equal(firstRound.whiteCardsUsed.length + (firstRound.blackCard.pick * _.keys(players).length));
         });
 
-        it('assigns a new judge', () => {
+        it('assigns a new Czar', () => {
             //should.exist(secondRound.czarId);
             //secondRound.czarId.should.not.equal('player1');
             should(secondRound.czarId).not.equal('player1');

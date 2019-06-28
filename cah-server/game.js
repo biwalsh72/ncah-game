@@ -21,7 +21,7 @@ class Game {
     }));
   }
 
-  get _previousJudge() {
+  get _previousCzar() {
     return _.last(this.rounds) ? _.last(this.rounds).czarId : undefined;
   }
 
@@ -42,7 +42,7 @@ class Game {
   }
 
   newRound(players) {
-    const round = new Round(this.id, players, this._whiteCardsUsed, this._blackCardsUsed, this._previousJudge);
+    const round = new Round(this.id, players, this._whiteCardsUsed, this._blackCardsUsed, this._previousCzar);
     this.rounds.push(round);
     return round;
   }

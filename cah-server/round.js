@@ -61,9 +61,9 @@ class Round {
     if (!this.previousCzar) {
       this.czarId = this.playerIds[0];
     } else {
-      const nextJudgeIndex = this.playerIds.indexOf(this.previousCzar) + 1;
-      if (this.playerIds[nextJudgeIndex]) {
-        this.czarId = this.playerIds[nextJudgeIndex];
+      const nextCzarIndex = this.playerIds.indexOf(this.previousCzar) + 1;
+      if (this.playerIds[nextCzarIndex]) {
+        this.czarId = this.playerIds[nextCzarIndex];
       } else {
         this.czarId = this.playerIds[0];
       }

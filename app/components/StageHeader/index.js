@@ -3,12 +3,12 @@ import './style.scss';
 var createReactClass = require('create-react-class');
 
 const StageHeader = createReactClass({
-  renderJudgeText(round, user) {
+  renderCzarText(round, user) {
     if (round && round.czarId !== user.id) {
       return null;
     }
 
-    return <p className="judge-text">You are the Czar!</p>;
+    return <p className="Czar-text">You are the Czar!</p>;
   },
 
   render() {
@@ -17,7 +17,7 @@ const StageHeader = createReactClass({
     return (
       <div className="header">
         <p className="round">Round { currentGame.rounds.length }</p>
-        { this.renderJudgeText(currentRound, user) }
+        { this.renderCzarText(currentRound, user) }
         <p className="player">{ user.username }</p>
       </div>
     );

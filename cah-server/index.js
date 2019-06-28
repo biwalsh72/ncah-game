@@ -62,14 +62,15 @@ class CahServer {
 
       this.updateRoom();
 
-      this.socket.emit('disconnected');
+      //this.socket.emit('disconnected');
       //this.socket.player.disconnect();
 
       ///////////add if playercount < 3 restart the game(room)
 
-
-      if (this.socket.room._playerCount > 2) {
-
+      
+      //if (this.socket.room._playerCount > 2) {
+      if (this.socket.room._playerCount < 3) {
+        console.log('Less than 3 players are in the current game. Restarting.');
         this.updateRoom();
 
         this.socket.room.newMessage({
@@ -80,6 +81,9 @@ class CahServer {
 
         this.startGame();
 
+      }
+      else if (this.socket.room._playerCount === 0) {
+        this.startGame();
       }
     }
   }
@@ -118,6 +122,11 @@ class CahServer {
     }
 
     this.updateRoom();
+
+    if (this.socket.room._currentGame) {
+
+      
+    }
   }
 
   sendChat(data, username) {
@@ -137,18 +146,18 @@ class CahServer {
 
   startGame() {
     this.socket.room.newGame();
-    this.displayNextJudge();
+    this.displayNextCzar();
     this.updateRoom();
   }
 
-  displayNextJudge() {
+  displayNextCzar() {
     const {
       room
     } = this.socket;
-    if (room._currentGame.rounds.length && room._currentJudge.username) {
+    if (room._currentGame.rounds.length && room._currentCzar.username) {
       room.newMessage({
         username: 'Server',
-        text: `Round ${ room._currentGame.rounds.length } - ${ room._currentJudge.username } is the judge`,
+        text: `Round ${ room._currentGame.rounds.length } - ${ room._currentCzar.username } is the Czar`,
         type: 'server'
       });
     }
@@ -163,7 +172,7 @@ class CahServer {
     //if (gameId && room) {
     const game = room.getGameById(gameId);
     game.newRound(room.players);
-    this.displayNextJudge();
+    this.displayNextCzar();
 
     this.updateRoom();
     //}
@@ -179,21 +188,6 @@ class CahServer {
 
       this.updateRoom();
     }
-
-
-
-    /*
-    if (gameId && this.socket.room.getGameById(gameId)) {
-      const game = this.socket.room.getGameById(gameId);
-
-      if (game && game.getRoundById(roundId)) {
-        const round = game.getRoundById(roundId);
-        round.playerSubmitted(playerId, choices);
-
-        this.updateRoom();
-      }
-    }
-    */
   }
 
   winnerChosen(playerId, gameId, roundId) {

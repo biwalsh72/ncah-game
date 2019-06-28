@@ -56,33 +56,33 @@ describe('Round', () => {
         });
     });
 
-    describe('assigning a judge', () => {
-        describe('when nobody has been a judge', () => {
+    describe('assigning a Czar', () => {
+        describe('when nobody has been a Czar', () => {
             beforeEach(() => {
                 round = new Round('1', players, whiteCardsUsed, blackCardsUsed, []);
             });
 
-            it('assigns the first player to be judge', () => {
+            it('assigns the first player to be Czar', () => {
                 should(round.czarId).equal('player1');
             });
         });
 
-        describe('when a few people have been judge', () => {
+        describe('when a few people have been Czar', () => {
             beforeEach(() => {
                 round = new Round('1', players, whiteCardsUsed, blackCardsUsed, 'player3');
             });
 
-            it('assigns the first player to be judge', () => {
+            it('assigns the first player to be Czar', () => {
                 should(round.czarId).equal('player4');
             });
         });
 
-        describe('when everyone has been a judge', () => {
+        describe('when everyone has been a Czar', () => {
             beforeEach(() => {
                 round = new Round('1', players, whiteCardsUsed, blackCardsUsed, 'player100');
             });
 
-            it('assigns the first player to be judge again', () => {
+            it('assigns the first player to be Czar again', () => {
                 should(round.czarId).equal('player1');
             });
         });
