@@ -52,7 +52,14 @@
         <div class="title w3-animate-right">In-Progress Games</div>
         <div class='roomlist-window css-scrollbar'>
             <div class='room-entry'>
+                <% if (rooms) { %>
                 <%= JSON.stringify(Object.keys(rooms)) %>
+                <% } %>
+            </div>
+            <div class = 'room-entry players'>
+                <% if (rooms) { %>
+                <%= JSON.stringify(rooms.length) %>
+                <% } %>
             </div>
         </div>
     </div>
