@@ -14,6 +14,7 @@ const flash = require('connect-flash');
 const socketioAuth = require('socketio-auth');
 const morgan = require('morgan');
 const ejs = require('ejs');
+const Cookies = require('js-cookie');
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {
   pingTimeout: 30000,
@@ -71,9 +72,9 @@ const cahServer = new CahServer(io);
 io.on('connection', (socket) => {
   cahServer.init(socket);
 
-  
   let rooms = io.sockets.adapter.rooms;
-  console.log(rooms);
+  //console.log(rooms["sockets"]);
+  exports.rooms = rooms;
 
   socket.on('disconnect', function (reason) {
     console.log('Socket disconnected! ' + reason);

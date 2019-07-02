@@ -37,10 +37,7 @@
                 <div class='addroom-input-container'>
                     <input id='room-title' placeholder='Enter room name' class='addroom-input' />
                 </div>
-                <!--<div class='addroom-input-container'>
-                        <label class='addroom-label'>Points to win: </label>
-                        <input type='number' id='points-to-win' class='addroom-input' placeholder='10' />
-                    </div>-->
+                
                 <div class='addroom-input-container'>
                     <input type='submit' value='Host Game' class='btn' />
                 </div>
@@ -54,7 +51,9 @@
     <div class='room-list'>
         <div class="title w3-animate-right">In-Progress Games</div>
         <div class='roomlist-window css-scrollbar'>
-            
+            <div class='room-entry'>
+                <%= JSON.stringify(Object.keys(rooms)) %>
+            </div>
         </div>
     </div>
 
@@ -79,9 +78,6 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js'></script>
 
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io();
-    </script>
 </body>
 
 </html>

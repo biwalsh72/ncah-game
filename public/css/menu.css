@@ -94,6 +94,7 @@ p {
 .room-entry {
     border: 1px solid;
     border-color: white;
+    color: white;
     padding: 5px;
     text-align: left;
     margin: 0 10px;

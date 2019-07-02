@@ -1,5 +1,6 @@
 const path = require('path');
 const Cookies = require('js-cookie');
+const Rooms = require('../server.js');
 
 module.exports = function (app, passport) {
     // normal routes ===============================================================
@@ -18,7 +19,8 @@ module.exports = function (app, passport) {
 
     app.get('/menu', isLoggedIn, function (req, res) {
         res.render('menu.ejs', {
-            user: req.user
+            user: req.user,
+            rooms: Rooms.rooms
         });
     });
 

@@ -26,7 +26,7 @@ class CahServer {
   }
 
   userJoined(roomName) {
-    console.log("userJoined room " + roomName);
+    console.log("userJoined room " + roomName); ///////NEW
     this.rooms[roomName] = this.rooms[roomName] || new Room(roomName);
     this.socket.room = this.rooms[roomName];
     this.socket.join(roomName);
@@ -68,9 +68,7 @@ class CahServer {
       ///////////add if playercount < 3 restart the game(room)
 
       
-      //if (this.socket.room._playerCount > 2) {
-      if (this.socket.room._playerCount < 3) {
-        console.log('Less than 3 players are in the current game. Restarting.');
+      if (this.socket.room._playerCount > 2) {
         this.updateRoom();
 
         this.socket.room.newMessage({
@@ -81,9 +79,6 @@ class CahServer {
 
         this.startGame();
 
-      }
-      else if (this.socket.room._playerCount === 0) {
-        this.startGame();
       }
     }
   }
@@ -122,11 +117,6 @@ class CahServer {
     }
 
     this.updateRoom();
-
-    if (this.socket.room._currentGame) {
-
-      
-    }
   }
 
   sendChat(data, username) {
