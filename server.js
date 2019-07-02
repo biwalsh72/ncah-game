@@ -72,8 +72,7 @@ const cahServer = new CahServer(io);
 io.on('connection', (socket) => {
   cahServer.init(socket);
 
-  let rooms = io.sockets.adapter.rooms;
-  //console.log(rooms["sockets"]);
+  const rooms = io.sockets.adapter.rooms;
   exports.rooms = rooms;
 
   socket.on('disconnect', function (reason) {

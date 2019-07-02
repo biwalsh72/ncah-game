@@ -53,12 +53,12 @@
         <div class='roomlist-window css-scrollbar'>
             <div class='room-entry'>
                 <% if (rooms) { %>
-                <%= JSON.stringify(Object.keys(rooms)) %>
+                <%= JSON.stringify(Object.keys(rooms), null, 4) %>
                 <% } %>
             </div>
             <div class = 'room-entry players'>
                 <% if (rooms) { %>
-                <%= JSON.stringify(rooms.length) %>
+                <%= JSON.stringify(rooms, null, 4) %>
                 <% } %>
             </div>
         </div>
