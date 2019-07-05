@@ -21,7 +21,10 @@ Use command "npm run test"
 
 * [Socket.io] - The realtime networking framework used
 * [React] - User Interface Library
-* [ROME] - Used to generate RSS Feeds
+* [Webpack] - Module Bundler for React Components
+* [EJS] - Templating system for login
+* [Passport] - User Authentication
+* [Mongoose] - MongoDB connection
 
 ## Authors
 
