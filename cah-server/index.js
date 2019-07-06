@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const Room = require('./room.js');
 const Player = require('./player.js');
+
 const {
   cleanString,
   urlifyText
@@ -8,12 +9,12 @@ const {
 
 class CahServer {
   constructor(io) {
-    this.io = io;
+    this.io = io;   //i think it stems from here
     this.rooms = {};
   }
 
   init(socket) {
-    this.socket = socket;
+    this.socket = socket;   //might stem from here as well
     socket.on('join', this.userJoined.bind(this));
     socket.on('disconnect', this.userLeft.bind(this));
     socket.on('respond', this.userClosed.bind(this));
@@ -26,7 +27,6 @@ class CahServer {
   }
 
   userJoined(roomName) {
-    console.log("userJoined room " + roomName); ///////NEW
     this.rooms[roomName] = this.rooms[roomName] || new Room(roomName);
     this.socket.room = this.rooms[roomName];
     this.socket.join(roomName);
@@ -51,21 +51,13 @@ class CahServer {
 
     if (this.socket.room && this.socket.player && this.socket.player.username !== undefined) {
       console.log('ROOMNAME ' + this.socket.room.name);
-      console.log('PLAYERNAME ' + this.socket.player.username);
+      console.log('PLAYERNAME ' + this.socket.player.username);   ///not getting right player from socket somewhere
 
-      //maybe save this info into a cookie to retrieve on the menu?
-
-      this.socket.room.playerLeft(this.socket.player.id);
-
+      this.socket.room.playerLeft(this.socket.player.id); //this.socket.player.id);     //possibly getting wrong id?
 
       console.log('user ' + this.socket.player.username + ' left the room ' + this.socket.room.name);
 
       this.updateRoom();
-
-      //this.socket.emit('disconnected');
-      //this.socket.player.disconnect();
-
-      ///////////add if playercount < 3 restart the game(room)
 
       
       if (this.socket.room._playerCount > 2) {

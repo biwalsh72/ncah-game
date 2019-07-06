@@ -19,7 +19,8 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server, {
   pingTimeout: 30000,
   pingInterval: 60000,
-  upgradeTimeout: 50000
+  upgradeTimeout: 50000,
+  cookie: false
 });
 const {
   cleanString,
@@ -70,7 +71,7 @@ app.use('/:id', express.static(path.resolve('build')));
 
 const cahServer = new CahServer(io);
 io.on('connection', (socket) => {
-  cahServer.init(socket);
+  cahServer.init(socket);   //maybe not creating unique sockets?
 
   const rooms = io.sockets.adapter.rooms;
   exports.rooms = rooms;

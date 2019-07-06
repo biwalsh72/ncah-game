@@ -1,5 +1,4 @@
 import React from 'react';
-//import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
 import  io  from 'socket.io-client';
 import './css/room.scss';

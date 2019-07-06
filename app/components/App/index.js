@@ -26,9 +26,11 @@ const App = createReactClass({
   componentWillMount() {
     const {socket, data } = this.props;
     socket.on('connect', this.connect);
+    
     socket.on('reconnect', () => {
       socket.emit('subscribe', window.location.pathname.substring(1))
     });
+    
     socket.on('updateroom', this.updateRoom);
 
     if (sessionStorage.user) {
@@ -62,7 +64,7 @@ const App = createReactClass({
 
 
   componentWillUnMount() {
-    //localStorage.clear();
+    //sessionStorage.clear();
     console.log('unmounted.');
   },
 
@@ -141,7 +143,6 @@ const App = createReactClass({
         <Stage { ...this.state } user={ this.user() } socket={ socket } data={ data } />
         <div className="game-actions">
           <button onClick={ this.toggleChat } title="Toggle chat">💬</button>
-          { <button onClick={ this.resetGame } title="Reset game (use if in a broken state">🔄</button> }
         </div>
         <ChatBox user={ this.user() } socket={ socket } { ...this.state } />
       </main>

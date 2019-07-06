@@ -34,8 +34,10 @@ class Round {
     const player = this.players[playerId];
     console.log('gameID' + this.gameId);
     
-     delete this.players[playerId];
+     delete this.players[playerId];   //deleting wrong entry in player list
      this.playerIds = _.map(this.players, (p => p.id));
+
+     console.log(this.players);
 
      console.log('playerIDs that are left ' + this.playerIds);
 
@@ -49,7 +51,6 @@ class Round {
   playerJoined(player) {
     console.log("playerJoined: " + JSON.stringify(player));
 
-    // Temporary fix
     //if (!this.gameInterrupt) {
       this.players[player.id] = player;
       this.playerIds.push(player.id);
