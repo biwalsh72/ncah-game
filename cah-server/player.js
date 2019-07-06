@@ -6,10 +6,11 @@ class Player {
     this.cards = [];
   }
 
+  //add the 10 chosen cards into the player's object key
   get cardIndexes() {
     return this.cards.map(c => c.index);
   }
-
+  
   addWhiteCard(index) {
     this.cards.push(index);
   }

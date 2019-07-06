@@ -22,19 +22,24 @@ const io = require('socket.io')(server, {
   upgradeTimeout: 50000,
   cookie: false
 });
+
+//bad input fixes
 const {
   cleanString,
   urlifyText
 } = require('./utils');
+//making sure the cards are hosted on the server
 const data = require('./data.json');
 const rooms = {};
 // or
 var util = require('util');
 
+//connect to MONGODB database as defined in /config/database.js
 mongoose.connect(configDB.url, {
   useNewUrlParser: true
 });
 
+//require user authentication rules as defined in /config/passport.js
 require('./config/passport')(passport);
 
 app.use(morgan('dev')); // log every request to the console
@@ -43,9 +48,11 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-
+//employ ejs as the default engine extension for displaying webpages
 app.set('view engine', 'ejs');
 
+
+//render index.ejs from /views as the default page
 app.get('/', function (req, res) {
   res.render('index');
 });

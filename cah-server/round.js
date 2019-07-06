@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const data = require('../data.json');
 
+//Defining all rules/actions that occur during each round of the game
 class Round {
   constructor(gameId, players = {}, whiteCardsUsed = [], blackCardsUsed = [], previousCzar) {
     this.gameId = gameId;
@@ -51,7 +52,7 @@ class Round {
   playerJoined(player) {
     console.log("playerJoined: " + JSON.stringify(player));
 
-    //if (!this.gameInterrupt) {
+    //if (!this.gameInterrupt) { ------temp fix
       this.players[player.id] = player;
       this.playerIds.push(player.id);
       this.allocateWhiteCards();

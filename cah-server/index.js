@@ -1,20 +1,21 @@
 const _ = require('lodash');
 const Room = require('./room.js');
 const Player = require('./player.js');
-
+//bug fixes
 const {
   cleanString,
   urlifyText
 } = require('../utils');
 
+//Defining serverside rules for gameplay on CahServer
 class CahServer {
   constructor(io) {
-    this.io = io;   //i think it stems from here
+    this.io = io;   
     this.rooms = {};
   }
 
   init(socket) {
-    this.socket = socket;   //might stem from here as well
+    this.socket = socket;   
     socket.on('join', this.userJoined.bind(this));
     socket.on('disconnect', this.userLeft.bind(this));
     socket.on('respond', this.userClosed.bind(this));
@@ -26,6 +27,7 @@ class CahServer {
     socket.on('next-round', this.nextRound.bind(this));
   }
 
+  //add user to socket namespace when they join a game
   userJoined(roomName) {
     this.rooms[roomName] = this.rooms[roomName] || new Room(roomName);
     this.socket.room = this.rooms[roomName];
@@ -33,6 +35,7 @@ class CahServer {
     this.updateRoom();
   }
 
+  //display message when a user closes out of the game
   userClosed(data) {
     console.log('user Closed');
     this.socket.room.newMessage({
@@ -45,15 +48,16 @@ class CahServer {
     this.updateRoom();
   }
 
+  //disconnect player from socket room (not correct)
   userLeft(reason) {
 
     console.log('reason: ' + reason);
 
     if (this.socket.room && this.socket.player && this.socket.player.username !== undefined) {
       console.log('ROOMNAME ' + this.socket.room.name);
-      console.log('PLAYERNAME ' + this.socket.player.username);   ///not getting right player from socket somewhere
+      console.log('PLAYERNAME ' + this.socket.player.username);
 
-      this.socket.room.playerLeft(this.socket.player.id); //this.socket.player.id);     //possibly getting wrong id?
+      this.socket.room.playerLeft(this.socket.player.id); //possibly getting wrong id?
 
       console.log('user ' + this.socket.player.username + ' left the room ' + this.socket.room.name);
 
@@ -75,6 +79,7 @@ class CahServer {
     }
   }
 
+  //after user is added to the room, add them as a player to the game
   addPlayer(player) {
     let {
       id,
@@ -111,6 +116,7 @@ class CahServer {
     this.updateRoom();
   }
 
+  //self-explanatory
   sendChat(data, username) {
 
     if (this.socket.room) {
@@ -126,12 +132,14 @@ class CahServer {
     this.updateRoom();
   }
 
+  //start game and choose new card czar
   startGame() {
     this.socket.room.newGame();
     this.displayNextCzar();
     this.updateRoom();
   }
 
+  //send message to the server about who the next card czar is
   displayNextCzar() {
     const {
       room
@@ -146,6 +154,7 @@ class CahServer {
 
   }
 
+  //move to next round when game is in progress
   nextRound(gameId) {
     const {
       room
@@ -161,6 +170,7 @@ class CahServer {
 
   }
 
+  //when a player submits a card during a round
   playerSubmitted(gameId, roundId, playerId, choices) {
     const game = this.socket.room.getGameById(gameId);
 
@@ -172,6 +182,7 @@ class CahServer {
     }
   }
 
+  //choose and display who won the last round
   winnerChosen(playerId, gameId, roundId) {
     const game = this.socket.room.getGameById(gameId);
 
@@ -189,11 +200,10 @@ class CahServer {
 
       this.updateRoom();
     }
-
-
-
   }
 
+
+  //update all elements of the room after each action during the game
   updateRoom() {
     const {
       player,

@@ -5,12 +5,12 @@ const Rooms = require('../server.js');
 module.exports = function (app, passport) {
     // normal routes ===============================================================
 
-    // show the home page (will also have our login links)
+    // show the home page (will also have login links)
     app.get('/', function (req, res) {
         res.render('index.ejs');
     });
 
-    // PROFILE SECTION =========================
+    // PROFILE SECTION (not currently being used) =========================
     app.get('/profile', isLoggedIn, function (req, res) {
         res.render('profile.ejs', {
             user: req.user
@@ -24,25 +24,13 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get('/testmenu', isLoggedIn, function (req, res) {
-        res.render('testmenu.ejs', {
-            user: req.user
-        });
-    });
-
-
-    app.get('/room', isLoggedIn, function (req, res) {
-        res.render('room.ejs', {
-            user: req.user
-        });
-    });
-
     // LOGOUT ==============================
     app.get('/logout', function (req, res) {
         req.logout();
         res.redirect('/');
     });
 
+    // CREATE GAME PAGE ========================
     app.get('/create', isLoggedIn, function (req, res) {
         let user = req.user;
         Cookies.set('username', user.local.username);
@@ -50,6 +38,7 @@ module.exports = function (app, passport) {
         res.sendFile(path.resolve(__dirname + '/../public/index.html'));
     });
 
+    //website address for each instance of the game should have address /room/(roomName)
      app.get('/room/:id', isLoggedIn, function (req, res) {
         res.sendFile(path.resolve(__dirname + '/../public/room.html'));
     });
@@ -109,9 +98,6 @@ module.exports = function (app, passport) {
         failureFlash: true // allow flash messages
     }));
 
-
-
-
     // =============================================================================
     // UNLINK ACCOUNTS =============================================================
     // =============================================================================
@@ -133,9 +119,7 @@ module.exports = function (app, passport) {
 };
 
 
-
-
-// route middleware to ensure User is logged in
+// route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();

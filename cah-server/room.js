@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const Game = require('./game.js');
 
+//Defining all elements that matter in a room where the game is hosted
 class Room {
   constructor(name = '', players = {}, messages = [], games = []) {
     this.name = name;

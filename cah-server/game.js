@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const Round = require('./round.js');
 
+//Defining all actions that occur over the course of multiple rounds
 class Game {
   constructor(players) {
     this.players = players;
