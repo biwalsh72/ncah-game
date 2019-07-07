@@ -34,28 +34,34 @@ class Round {
 
     const player = this.players[playerId];
     console.log('gameID' + this.gameId);
-    
-     delete this.players[playerId];   //deleting wrong entry in player list
-     this.playerIds = _.map(this.players, (p => p.id));
 
-     console.log(this.players);
+    this.playerId = null;
 
-     console.log('playerIDs that are left ' + this.playerIds);
+    delete this.players[playerId]; //deleting wrong entry in player list (returns undefined)
+    this.playerIds = _.map(this.players, (p) => {
+      return p.id;
+    });
 
-     if (this.czarId === playerId) {
-       this.czarId = null;
-       //this.playerId = null;
-       this.assignCzar(); //////////////////bug happening here need to make sure that the player that left is no longer the card czar
-     }
+    console.log(Object.keys(this.players));
+
+    //console.log(this.players);
+
+    //console.log('playerIDs that are left ' + this.playerIds);
+
+    if (this.czarId === playerId) {
+      this.czarId = null;
+      //this.playerId = null;
+      this.assignCzar(); //////////////////bug happening here need to make sure that the player that left is no longer the card czar
+    }
   }
 
   playerJoined(player) {
     console.log("playerJoined: " + JSON.stringify(player));
 
     //if (!this.gameInterrupt) { ------temp fix
-      this.players[player.id] = player;
-      this.playerIds.push(player.id);
-      this.allocateWhiteCards();
+    this.players[player.id] = player;
+    this.playerIds.push(player.id);
+    this.allocateWhiteCards();
     //}
   }
 
@@ -109,7 +115,9 @@ class Round {
     _.forEach(this.chosenWhiteCards, (choices, playerId) => {
       const player = this.players[playerId];
       choices.forEach((choice) => {
-        const choiceIndex = _.findIndex(player.cards, { index: choice });
+        const choiceIndex = _.findIndex(player.cards, {
+          index: choice
+        });
         player.cards.splice(choiceIndex, 1);
       });
     });
@@ -121,22 +129,24 @@ class Round {
 
   allocateWhiteCardsForPlayer(player, playerId) {
     const whiteCards = data.whiteCards;
-    if (!player && !player.cards) { player.cards = []; }
+    if (!player && !player.cards) {
+      player.cards = [];
+    }
 
     if (player.cards) {
       while (player.cards.length < 10) {
         const cardIndex = this.getWhiteCard();
         this.whiteCardsUsed.push(cardIndex);
-  
+
         const card = {
           index: cardIndex,
           text: whiteCards[cardIndex]
         }
-  
+
         player.addWhiteCard(card);
       }
     }
-    
+
   }
 }
 

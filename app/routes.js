@@ -17,6 +17,7 @@ module.exports = function (app, passport) {
         });
     });
 
+    // ADMIN MENU ============================================
     app.get('/menu', isLoggedIn, function (req, res) {
         res.render('menu.ejs', {
             user: req.user,

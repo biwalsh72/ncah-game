@@ -1,21 +1,23 @@
 const _ = require('lodash');
 const Room = require('./room.js');
 const Player = require('./player.js');
+const Cookies = require('js-cookie');
+const User = require('../server.js');
 //bug fixes
 const {
   cleanString,
   urlifyText
 } = require('../utils');
 
-//Defining serverside rules for gameplay on CahServer
+//Defining serverside rules for gameplay on a CahServer (called in server.js)
 class CahServer {
   constructor(io) {
-    this.io = io;   
+    this.io = io; //change maybe?
     this.rooms = {};
   }
 
   init(socket) {
-    this.socket = socket;   
+    this.socket = socket;
     socket.on('join', this.userJoined.bind(this));
     socket.on('disconnect', this.userLeft.bind(this));
     socket.on('respond', this.userClosed.bind(this));
@@ -27,7 +29,7 @@ class CahServer {
     socket.on('next-round', this.nextRound.bind(this));
   }
 
-  //add user to socket namespace when they join a game
+  //add user to socket room when they join a game
   userJoined(roomName) {
     this.rooms[roomName] = this.rooms[roomName] || new Room(roomName);
     this.socket.room = this.rooms[roomName];
@@ -57,14 +59,17 @@ class CahServer {
       console.log('ROOMNAME ' + this.socket.room.name);
       console.log('PLAYERNAME ' + this.socket.player.username);
 
-      this.socket.room.playerLeft(this.socket.player.id); //possibly getting wrong id?
+      let currId = JSON.stringify(User.data['id']);
 
-      console.log('user ' + this.socket.player.username + ' left the room ' + this.socket.room.name);
+      this.socket.room.playerLeft(currId);
+
+      console.log('user ' + this.socket.player.username + ' left ' + this.socket.room.name);
 
       this.updateRoom();
 
-      
-      if (this.socket.room._playerCount > 2) {
+      if (this.socket.room._playerCount < 3) {
+        console.log('Less than 3 players in the game. Restarting.');
+
         this.updateRoom();
 
         this.socket.room.newMessage({
@@ -74,7 +79,6 @@ class CahServer {
         });
 
         this.startGame();
-
       }
     }
   }

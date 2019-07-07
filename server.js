@@ -51,7 +51,6 @@ app.use(bodyParser.urlencoded({
 //employ ejs as the default engine extension for displaying webpages
 app.set('view engine', 'ejs');
 
-
 //render index.ejs from /views as the default page
 app.get('/', function (req, res) {
   res.render('index');
@@ -78,8 +77,9 @@ app.use('/:id', express.static(path.resolve('build')));
 
 const cahServer = new CahServer(io);
 io.on('connection', (socket) => {
-  cahServer.init(socket);   //maybe not creating unique sockets?
+  cahServer.init(socket); 
 
+  //retireve list of rooms and sockets
   const rooms = io.sockets.adapter.rooms;
   exports.rooms = rooms;
 
@@ -88,6 +88,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('greet', function (data) {
+    exports.data = JSON.parse(data);
     socket.emit('respond', data);
     console.log('GREET RECEIVED from ' + data);
   });
