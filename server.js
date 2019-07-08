@@ -56,25 +56,29 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
+//set up express session
 app.use(session({
   secret: 'bitchwhatareyousaying', // session secret
   resave: true,
   saveUninitialized: true
 }));
 
+//set up passport session and allow flash usage
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
 var numUsers = 0;
 
+//use app and passport variables in routes.js to link webpages
 require('./app/routes.js')(app, passport);
 
-
+//host public and build folder on server
 app.use(express.static('public'));
 app.use('/:id', express.static(path.resolve('build')));
 
 
+//create new set of rules on connection
 const cahServer = new CahServer(io);
 io.on('connection', (socket) => {
   cahServer.init(socket); 
@@ -83,10 +87,12 @@ io.on('connection', (socket) => {
   const rooms = io.sockets.adapter.rooms;
   exports.rooms = rooms;
 
+  //run on disconnect
   socket.on('disconnect', function (reason) {
     console.log('Socket disconnected! ' + reason);
   });
 
+  //run on refresh
   socket.on('greet', function (data) {
     exports.data = JSON.parse(data);
     socket.emit('respond', data);
@@ -94,12 +100,13 @@ io.on('connection', (socket) => {
   });
 });
 
+//start server on port 3000
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
 
-
+//setup dev server for live editing without recompiling
 if (!isProduction) {
   const webpack = require('webpack');
   const WebpackDevServer = require('webpack-dev-server');
