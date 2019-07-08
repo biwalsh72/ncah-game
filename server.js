@@ -91,6 +91,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', function (reason) {
     console.log('Socket disconnected! ' + reason);
   });
+  
 
   //run on refresh
   socket.on('greet', function (data) {

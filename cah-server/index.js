@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const Room = require('./room.js');
 const Player = require('./player.js');
-const Cookies = require('js-cookie');
 const User = require('../server.js');
 //bug fixes
 const {
@@ -12,12 +11,15 @@ const {
 //Defining serverside rules for gameplay on a CahServer (called in server.js)
 class CahServer {
   constructor(io) {
-    this.io = io; //change maybe?
+    this.io = io; 
     this.rooms = {};
   }
 
   init(socket) {
     this.socket = socket;
+    socket.on('reconnect', () => {
+      socket.emit('subscribe', window.location.pathname.substring(1))
+    });
     socket.on('join', this.userJoined.bind(this));
     socket.on('disconnect', this.userLeft.bind(this));
     socket.on('respond', this.userClosed.bind(this));
@@ -55,13 +57,13 @@ class CahServer {
 
     console.log('reason: ' + reason);
 
+    this.socket.player = User.data;
+
     if (this.socket.room && this.socket.player && this.socket.player.username !== undefined) {
-      console.log('ROOMNAME ' + this.socket.room.name);
-      console.log('PLAYERNAME ' + this.socket.player.username);
 
-      let currId = JSON.stringify(User.data['id']);
+      //let currId = JSON.stringify(User.data['id']);
 
-      this.socket.room.playerLeft(currId);
+      this.socket.room.playerLeft(this.socket.player.id);
 
       console.log('user ' + this.socket.player.username + ' left ' + this.socket.room.name);
 
@@ -100,7 +102,7 @@ class CahServer {
     if (this.socket.room) {
       const newPlayer = new Player(id, username);
 
-      this.socket.player = newPlayer;
+      this.socket.player = newPlayer;  ///this the problem (always equal the last player that joined)
       try {
         this.socket.room.addPlayer(newPlayer);
         console.log(username + ' joined ' + this.socket.room.name)
@@ -148,7 +150,7 @@ class CahServer {
     const {
       room
     } = this.socket;
-    if (room._currentGame.rounds.length && room._currentCzar.username) {
+    if (room._currentGame.rounds.length && room._currentCzar.username && room._currentCzar !== undefined) {
       room.newMessage({
         username: 'Server',
         text: `Round ${ room._currentGame.rounds.length } - ${ room._currentCzar.username } is the Czar`,

@@ -35,8 +35,9 @@ const config = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: {
-            sourceMap: true
+          query: {
+            cacheDirectory: true,
+            presets: ["@babel/preset-react", "@babel/preset-env"]
           }
         }
       },
@@ -65,8 +66,8 @@ plugins: [
   ],
 
   performance: {
-    maxEntrypointSize: 2048000,
-    maxAssetSize: 2048000
+    maxEntrypointSize: 4000000,
+    maxAssetSize: 4000000
   }
 };
 
