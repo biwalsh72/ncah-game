@@ -8,7 +8,8 @@
     "node": "12.6.0"
   },
   "scripts": {
-    "start": "webpack && node server",
+    "start": "node server",
+    "play": "webpack && node server",
     "start-live": "PORT=80 && node server",
     "start-live-win": "SET PORT=80 && node server",
     "dev": "NODE_ENV=development node server",
