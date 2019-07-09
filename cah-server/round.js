@@ -37,7 +37,7 @@ class Round {
 
     this.playerId = null;
 
-    delete this.players[playerId]; //deleting wrong entry in player list (returns undefined)
+    delete this.players[playerId]; 
     this.playerIds = _.map(this.players, (p) => {
       return p.id;
     });
