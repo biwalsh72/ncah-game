@@ -5,6 +5,7 @@ import { ChatBox, Stage } from '../';
 import Cookies from 'js-cookie';
 var createReactClass = require('create-react-class');
 
+//Rendering game components and adding users to client & sessionStorage
 const App = createReactClass({
   getInitialState() {
     return {
@@ -64,7 +65,6 @@ const App = createReactClass({
 
 
   componentWillUnMount() {
-    //sessionStorage.clear();
     console.log('unmounted.');
   },
 
@@ -95,11 +95,6 @@ const App = createReactClass({
     let user = sessionStorage.user ? JSON.parse(sessionStorage.user) : { id: null };
 
     if (this.state.players[user.id]) {
-      //console.log('Return from user():');
-      //console.table(this.state.players[user.id]);
-      //console.log('current round: ' + this.getCurrentRound());
-      //console.log('current game: ' + this.getCurrentGame());
-      //console.log('games: ' + this.getGames());
       return this.state.players[user.id];
     }
 
@@ -135,8 +130,6 @@ const App = createReactClass({
   
       this.props.socket.emit('adduser', user);
     }
-    
-    // Here goes code if game in progress..
 
     return (
       <main className={ styles.main }>

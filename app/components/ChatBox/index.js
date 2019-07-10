@@ -4,6 +4,7 @@ import Messages from './Messages';
 import Form from './Form';
 var createReactClass = require('create-react-class');
 
+//combining form and messages classes into full chatbox
 const ChatBox = createReactClass({
   onSubmit(message, sender) {
     setTimeout(() => {

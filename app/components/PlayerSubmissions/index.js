@@ -2,9 +2,9 @@ import React from 'react';
 import _ from 'lodash';
 import { Card, ChooseWinnerButton } from '../';
 var createReactClass = require('create-react-class');
-
 import styles from './style.scss';
 
+//rendering cards submitted by players each round
 const PlayerSubmissions = createReactClass({
   renderPlayerSubmission(cardIndex, index) {
     const { data } = this.props;
@@ -24,18 +24,6 @@ const PlayerSubmissions = createReactClass({
   renderSubmission(player, playerId, index) {
     const { currentRound, user } = this.props;
     if (!currentRound.chosenWhiteCards[player.id]) { return null; }
-
-    // const { data, currentRound, user } = this.props;
-    // if (!currentRound.chosenWhiteCards[player.id]) { return null; }
-    // let pickCount = 0;
-    // let blackCardText = currentRound.blackCard.text;
-    //
-    // currentRound.chosenWhiteCards[playerId].forEach((choice) => {
-    //   const whiteCard = data.whiteCards[choice];
-    //   blackCardText = blackCardText.replace('<span class=\'underline\'></span>', whiteCard);
-    // });
-    //
-    // const card = { text: blackCardText };
 
     return (
       <div className="submission" key={ playerId } style={{"order": currentRound.chosenWhiteCards[playerId][0]}}>

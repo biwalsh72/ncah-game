@@ -5,8 +5,6 @@ import './css/room.scss';
 import data from '../data.json';
 import { App } from './components/index.js';
 
-//render variable is required after update to React v16
-
 //connect socket client to host page
 const socketIo = io.connect(window.location.host, { reconnect: true });
 

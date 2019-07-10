@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 var createReactClass = require('create-react-class');
 
+//Creating class for black and white cards
 const Card = createReactClass({
   onClick() {
     if (this.props.onClick) {

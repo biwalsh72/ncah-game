@@ -6,6 +6,7 @@ import './styles.scss';
 import style from './styles.scss';
 var createReactClass = require('create-react-class');
 
+//all elements on the stage (black card, white cards, round #, white cards, currentUsername, etc)
 const Stage = createReactClass({
   getInitialState() {
     return {

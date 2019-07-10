@@ -3,6 +3,7 @@ import styles from './style.scss';
 import './style.scss';
 var createReactClass = require('create-react-class');
 
+//rendering LeaderBoard for all players
 const LeaderBoard = createReactClass({
   renderRow({ playerId, score }, i) {
     const { players } = this.props;

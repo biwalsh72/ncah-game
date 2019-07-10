@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, LeaderBoard } from '../';
 var createReactClass = require('create-react-class');
 
+//Everything being rendered on the left side of the stage (black card, leaderboard, Submit Card Button)
 const StageLeft = createReactClass({
   submitChoices() {
     this.props.onSubmitChoices(this.props.currentRound);

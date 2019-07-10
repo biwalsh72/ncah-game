@@ -1,6 +1,7 @@
 import React from 'react';
 var createReactClass = require('create-react-class');
 
+//Rendering choose winner button for card czar
 const ChooseWinnerButton = createReactClass({
   onClick() {
     this.props.onClick(this.props.playerId);

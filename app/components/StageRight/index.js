@@ -2,6 +2,7 @@ import React from 'react';
 import { PlayerSubmissions, Card } from '../';
 var createReactClass = require('create-react-class');
 
+//Everything being rendered on the "right" side of the stage (answer cards)
 const StageRight = createReactClass({
   renderPlayerCard(card, index) {
     const { onWhiteCardSelected, selectedCards } = this.props;
