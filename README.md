@@ -5,13 +5,15 @@ A pretty simple HTML game so that you can play Cards Against Humanity with your 
 ## Getting Started
 
 Installing and running is easy:
-$ Download zip or clone project from Github
--Using npm
--Install dependencies using command "npm install"
--Run program using "npm start"
--In your browser, type "localhost:3000" in the address bar
+- Download zip or clone project from Github
 
-### Installing
+Using npm:
+- Install dependencies using command "npm install"
+- Run program using "npm start"
+
+In your browser, type "localhost:3000" in the address bar
+
+### Development
 
 Dev server (w/ live editing) on port 8080 will automatically start when "npm start" command is used.
 
@@ -38,7 +40,7 @@ Use command "npm run test".
 
 ## License
 
-This project is licensed under the MIT License
+This project is licensed under the MIT License.
 
 ## Acknowledgments
 
