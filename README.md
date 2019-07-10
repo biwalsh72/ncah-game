@@ -12,7 +12,7 @@ Installing and running is easy:
 
 ### Installing
 
-Dev server on port 8080 will automatically start when "npm start" command is used.
+Dev server (w/ live editing) on port 8080 will automatically start when "npm start" command is used.
 
 ## Running the tests
 
