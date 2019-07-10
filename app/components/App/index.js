@@ -3,8 +3,6 @@ import _ from 'lodash';
 import styles from './style.scss';
 import { ChatBox, Stage } from '../';
 import Cookies from 'js-cookie';
-import { model } from 'mongoose';
-import { copyFile } from 'fs';
 var createReactClass = require('create-react-class');
 
 const App = createReactClass({
