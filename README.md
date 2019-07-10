@@ -8,6 +8,7 @@ Installing and running is easy:
 -Download zip or clone project from Github
 -Install dependencies using command "npm install"
 -Run program using "npm start"
+-In your browser, type "localhost:3000" in the address bar
 
 ### Installing
 
