@@ -7,8 +7,8 @@ A pretty simple HTML game so that you can play Cards Against Humanity with your 
 Installing and running is easy:
 -Download zip or clone project from Github
 -Using npm:
-  Install dependencies using command "npm install"
-  Run program using "npm start"
+-Install dependencies using command "npm install"
+-Run program using "npm start"
 -In your browser, type "localhost:3000" in the address bar
 
 ### Installing
