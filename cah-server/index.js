@@ -52,7 +52,7 @@ class CahServer {
     this.updateRoom();
   }
 
-  //disconnect player from socket room (not correct)
+  //disconnect player from socket room
   userLeft(reason) {
 
     console.log('reason: ' + reason);
@@ -61,10 +61,7 @@ class CahServer {
 
     if (this.socket.room && this.socket.player && this.socket.player.username !== undefined) {
 
-      //let currId = JSON.stringify(User.data['id']);
-
       this.socket.room.playerLeft(this.socket.player.id);
-
       console.log('user ' + this.socket.player.username + ' left ' + this.socket.room.name);
 
       this.updateRoom();
@@ -132,9 +129,7 @@ class CahServer {
         type: 'chat'
       });
       console.log('chat message to ' + this.socket.room.name + ' ' + username + ': ' + data);
-
     }
-
     this.updateRoom();
   }
 
@@ -166,14 +161,11 @@ class CahServer {
       room
     } = this.socket;
 
-    //if (gameId && room) {
     const game = room.getGameById(gameId);
     game.newRound(room.players);
     this.displayNextCzar();
 
     this.updateRoom();
-    //}
-
   }
 
   //when a player submits a card during a round
@@ -229,9 +221,7 @@ class CahServer {
         currentRound: room._currentGame ? room._currentGame._currentRound : null,
       };
       this.io.to(room.name).emit('updateroom', update);
-
     }
-
   }
 }
 
