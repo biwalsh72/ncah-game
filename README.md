@@ -31,6 +31,8 @@ Use command "npm run test".
 * [EJS] - Templating system for login
 * [Passport] - User Authentication
 * [Mongoose] - MongoDB connection
+* [Chai] - Assertion Library for testing
+* [Mocha] - Unit Testing Framework
 
 ## Authors
 
