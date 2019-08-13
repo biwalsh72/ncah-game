@@ -46,4 +46,5 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 
+Thanks to [Bradjenn](https://github.com/bradjenn/cards-against-humanity) for the super basic source code.
 Thanks to many many many javascript tutorials.
